@@ -20,3 +20,53 @@ Special Offer
 - The code should be covered by tests
 - Write a documentation with code examples for the implemented calls (Postman
 collection is a nice-to-have)
+
+## Postman API Doc
+https://documenter.getpostman.com/view/5138316/RWToQyBR
+
+## Tech
+
+VoucherPool uses a number of open source projects to work properly:
+
+- [Laravel] - The PHP Framework For Web Artisans
+- [Laravel Migrations] - "Version control" for database
+- [Composer] - Dependency Manager 
+- [Bootstrap] - Front-end framework
+- [MySQL] - Relational Database
+- [PHPUnit] - Testing Framework
+- [PHP 7]
+
+## Instalation 
+
+Clone this repository
+```sh
+$ git clone https://github.com/hsiemon/Laravel_VoucherPool.git
+```
+
+Download composer 
+https://getcomposer.org/download/
+
+Install dependencies
+```sh
+$ php composer.phar install
+```
+
+Copy the .env
+```sh
+$ cp .env.testing .env
+```
+
+Change the following lines on .env and .env.testing file with your database credentials
+> DB_CONNECTION=mysql
+> DB_HOST=127.0.0.1
+> DB_PORT=3306
+> DB_DATABASE=Test_VoucherPool
+> DB_USERNAME=root
+> DB_PASSWORD=root
+
+Runs the migration
+```sh
+$ php artisan migrate
+```
+
+Generate your vouchers!

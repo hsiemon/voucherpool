@@ -16,6 +16,7 @@ Route::get('/offers', 'OfferController@index');
 Route::post('/offers/store', 'OfferController@store');
 
 Route::get('/recipients', 'RecipientController@index');
+Route::get('/recipients/{id}/vouchers', 'RecipientController@vouchers');
 Route::post('/recipients/store', 'RecipientController@store');
 
 Route::post('/vouchers/redeem', 'VoucherController@redeem');

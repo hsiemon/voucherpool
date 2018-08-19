@@ -15,36 +15,39 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           @include('layout.messages')
           
-          <h2>Recipient</h2>
-
-          @include('recipient.form')
+          <h2>{{$recipient->name}} - Vouchers</h2>
 
           <div class="table-responsive">
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>E-mail</th>
-                  <th>Name</th>
-                  <th>Actions</th>
+                  <th>Code</th>
+                  <th>Offer</th>
+                  <th>Expire On</th>
                 </tr>
               </thead>
               <tbody>
-                @forelse ($recipients as $recipient)
-                    <tr>
-                      <td>{{ $recipient->id }}</td>
-                      <td>{{ $recipient->email }}</td>
-                      <td>{{ $recipient->name }}</td>
-                      <td><a href="{{URL::to('recipients/'.$recipient->id.'/vouchers')}}" class="btn btn-info btn-rounded"><i class="fas fa-search"></i> Vouchers</a></td>
-                    </tr>
+                @forelse ($vouchers as $voucher)
+                <tr>
+                  <td>{{ $voucher->code }}</td>
+                  <td>{{ $voucher->offer->name }}</td>
+                  <td>{{ $voucher->expiration }}</td>
+                </tr>
                 @empty
-                    <tr>
-                        <td colspan="4">
-                            Recipient not found
-                        </td>
-                    </tr>
+                <tr>
+                  <td colspan="5">
+                    Voucher not found
+                  </td>
+                </tr>
                 @endforelse
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="5">
+                    {{ $vouchers->links() }}
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </main>

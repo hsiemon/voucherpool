@@ -32,29 +32,29 @@
               </thead>
               <tbody>
                 @forelse ($vouchers as $voucher)
-                    <tr>
-                      <td>{{ $voucher->code }}</td>
-                      <td>
-                          @if($voucher->alreadyUsed==1)
-                            <span class="badge badge-danger">
-                                <i class="fas fa-times"></i>
-                            </span>
-                          @else
-                            <span class="badge badge-info">
-                              <i class="fas fa-check"></i>                        
-                            </span>
-                          @endif
-                      </td>
-                      <td>{{ $voucher->recipient->email }}</td>
-                      <td>{{ $voucher->expiration }}</td>
-                      <td>{{ $voucher->usedAt }}</td>
-                    </tr>
+                <tr>
+                  <td>{{ $voucher->code }}</td>
+                  <td>
+                    @if($voucher->alreadyUsed==1)
+                    <span class="badge badge-danger">
+                      <i class="fas fa-times"></i>
+                    </span>
+                    @else
+                    <span class="badge badge-info">
+                      <i class="fas fa-check"></i>                        
+                    </span>
+                    @endif
+                  </td>
+                  <td>{{ $voucher->recipient->email }}</td>
+                  <td>{{ $voucher->expiration }}</td>
+                  <td>{{ $voucher->usedAt }}</td>
+                </tr>
                 @empty
-                    <tr>
-                        <td colspan="5">
-                            Voucher not found
-                        </td>
-                    </tr>
+                <tr>
+                  <td colspan="5">
+                    Voucher not found
+                  </td>
+                </tr>
                 @endforelse
               </tbody>
               <tfoot>
