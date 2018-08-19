@@ -11,8 +11,19 @@ use App\Models\Recipient;
 use App\Models\Offer;
 use App\Models\Voucher;
 
+/**
+*   VoucherControllerTest
+*
+*   Tests Case for the API Voucher controller
+*
+*   @author Henrique Siemon <henriquesiemon@msn.com>
+*/
 class VoucherControllerTest extends TestCase
 {
+    /**
+    *   Tests if the API controller returns an http code 400 on a post request 
+    *   to the redeem function without any value
+    */
     public function testRedeemInvalidRequestVoucher()
     {
         $response = $this->json('POST', '/api/vouchers/redeem');
@@ -20,6 +31,10 @@ class VoucherControllerTest extends TestCase
         $response->assertStatus(400);
     }
 
+    /**
+    *   Tests if the API controller returns an http code 404 on a post request 
+    *   to the redeem function with invalid values
+    */
     public function testRedeemVoucherNotFound(){
         $recipient = factory(Recipient::class)->make();
 
@@ -31,14 +46,21 @@ class VoucherControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
+    /**
+    *   Tests if the API controller returns a 200 http code and a success message on the redeem function with 
+    *   a valid post submit
+    */
     public function testRedeemValidVoucher()
     {
+        //Generate the recipient using a factory and save on database
         $recipient = factory(Recipient::class)->make();
         $recipient->save();
 
+        //Generate the offer using a factory and save on database
         $offer = factory(Offer::class)->make();
         $offer->save();
 
+        //Generate the recipient using a factory and save on database
         $voucher = factory(Voucher::class)->make();
         $voucher->recipient_id = $recipient->id;
         $voucher->offer_id = $offer->id;
@@ -59,13 +81,20 @@ class VoucherControllerTest extends TestCase
             ]);
     }
 
+    /**
+    *   Tests if the API controller returns an http code 200 and a error message on a post request 
+    *   to the redeem function with an expired voucher
+    */
     public function testRedeemExpiredVoucher(){
+        //Generate the recipient using a factory and save on database
         $recipient = factory(Recipient::class)->make();
         $recipient->save();
 
+        //Generate the offer using a factory and save on database
         $offer = factory(Offer::class)->make();
         $offer->save();
 
+        //Generate the recipient using a factory and save on database
         $voucher = factory(Voucher::class)->make();
         $voucher->recipient_id = $recipient->id;
         $voucher->offer_id = $offer->id;
@@ -87,14 +116,20 @@ class VoucherControllerTest extends TestCase
             ]);
     }
 
-
+    /**
+    *   Tests if the API controller returns an http code 200 and a error message on a post request 
+    *   to the redeem function with an already used voucher 
+    */
     public function testRedeemAlreadyUsedVoucher(){
+        //Generate the recipient using a factory and save on database
         $recipient = factory(Recipient::class)->make();
         $recipient->save();
 
+        //Generate the offer using a factory and save on database
         $offer = factory(Offer::class)->make();
         $offer->save();
 
+        //Generate the recipient using a factory and save on database
         $voucher = factory(Voucher::class)->make();
         $voucher->recipient_id = $recipient->id;
         $voucher->offer_id = $offer->id;

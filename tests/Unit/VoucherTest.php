@@ -10,6 +10,13 @@ use App\Models\Voucher;
 use App\Models\Recipient;
 use App\Models\Offer;
 
+/**
+*   VoucherTest
+*
+*   Tests Case for the Voucher model
+*
+*   @author Henrique Siemon <henriquesiemon@msn.com>
+*/
 class VoucherTest extends TestCase
 {
     protected $voucher;
@@ -30,11 +37,17 @@ class VoucherTest extends TestCase
         $this->voucher->generateCode($this->recipient->email, $this->offer->id, $this->voucher->expiration);
 	}
 
+    /**
+    *   Tests if the application can insert a voucher in the database
+    */
     public function testDatabaseInsert()
     {
         $this->assertTrue($this->voucher->save());
     }
 
+    /**
+    *   Tests if the application can update a voucher in the database
+    */
     public function testDatabaseUpdate()
     {
         $this->voucher->save();
@@ -43,6 +56,9 @@ class VoucherTest extends TestCase
         $this->assertTrue($this->voucher->save());   
     }
 
+    /**
+    *   Tests if the application can remove a voucher in the database
+    */
     public function testDatabaseRemove()
     {
         $this->voucher->save();
@@ -50,6 +66,9 @@ class VoucherTest extends TestCase
         $this->assertTrue($this->voucher->delete());   
     }
     
+    /**
+    *   Tests if the function isValid returns true on a not expirated voucher
+    */
     public function testNotExpiratedIsValid()
     {    	
     	$this->voucher->expiration = date("Y-m-d H:i:s", strtotime('+30 days'));
@@ -58,6 +77,9 @@ class VoucherTest extends TestCase
         $this->assertTrue($this->voucher->isValid());
     }
 
+    /**
+    *   Tests if the function isValid returns false on a expirated voucher
+    */
     public function testExpiratedIsInvalid()
     {
     	$this->voucher->expiration = date("Y-m-d H:i:s", strtotime('-30 days'));
@@ -66,6 +88,9 @@ class VoucherTest extends TestCase
         $this->assertFalse($this->voucher->isValid());
     }
 
+    /**
+    *   Tests if the function isValid returns false on a already used voucher
+    */
     public function testAlreadyUsedIsInvalid()
     {
     	$this->voucher->expiration = date("Y-m-d H:i:s", strtotime('+30 days'));
