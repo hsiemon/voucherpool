@@ -61,11 +61,11 @@ class VoucherController extends Controller
 
             }else{
                 //Return with an error message
-                return response()->json(null, 404);
+                return response()->json("Voucher not found", 404);
             }
         }
 
         //Return with the validator errors
-        return response()->json(null, 400);
+        return response()->json($validator->errors(), 400);
     }
 }
