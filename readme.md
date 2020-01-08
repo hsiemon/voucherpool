@@ -35,6 +35,8 @@ VoucherPool uses a number of open source projects to work properly:
 - [MySQL] - Relational Database
 - [PHPUnit] - Testing Framework
 - [PHP 7]
+- [Docker]
+- [Docker Compose]
 
 ## Instalation 
 
@@ -43,30 +45,32 @@ Clone this repository
 $ git clone https://github.com/hsiemon/Laravel_VoucherPool.git
 ```
 
-Download composer 
-https://getcomposer.org/download/
+Install Docker
+https://docs.docker.com/install/
 
-Install dependencies
-```sh
-$ php composer.phar install
-```
+Install Docker Compose
+https://docs.docker.com/compose/install/
 
 Copy the .env
 ```sh
 $ cp .env.testing .env
 ```
 
-Change the following lines on .env and .env.testing file with your database credentials
-> DB_CONNECTION=mysql
-> DB_HOST=127.0.0.1
-> DB_PORT=3306
-> DB_DATABASE=Test_VoucherPool
-> DB_USERNAME=root
-> DB_PASSWORD=root
+Run the container
+```sh
+$ docker-compose up -d
+```
+
+Install dependencies
+```sh
+$ docker-compose exec app composer install && php artisan migrate
+```
 
 Runs the migration
 ```sh
-$ php artisan migrate
+$ docker-compose exec app php artisan migrate
 ```
+
+Access http://localhost:8080
 
 Generate your vouchers!
