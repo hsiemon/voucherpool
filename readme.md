@@ -63,7 +63,7 @@ $ docker-compose up -d
 
 Install dependencies
 ```sh
-$ docker-compose exec app composer install && php artisan migrate
+$ docker-compose exec app composer install
 ```
 
 Runs the migration
